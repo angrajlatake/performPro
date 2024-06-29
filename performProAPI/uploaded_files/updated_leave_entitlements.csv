@@ -1,0 +1,51 @@
+Province,LeaveType,Duration_Weeks,Duration_Days,Monthly_Increment,Paid
+Ontario,Maternity Leave,17.0,,,False
+Ontario,Parental Leave,61.0,,,False
+Ontario,Medical Leave,,10.0,0.83,True
+Ontario,Bereavement Leave,,5.0,,False
+Ontario,Compassionate Care Leave,28.0,,,False
+Quebec,Maternity Leave,18.0,,,False
+Quebec,Parental Leave,52.0,,,False
+Quebec,Medical Leave,,10.0,0.83,True
+Quebec,Bereavement Leave,,5.0,,False
+Quebec,Compassionate Care Leave,28.0,,,False
+British Columbia,Maternity Leave,17.0,,,False
+British Columbia,Parental Leave,62.0,,,False
+British Columbia,Medical Leave,,10.0,0.83,True
+British Columbia,Bereavement Leave,,5.0,,False
+British Columbia,Compassionate Care Leave,28.0,,,False
+Alberta,Maternity Leave,16.0,,,False
+Alberta,Parental Leave,52.0,,,False
+Alberta,Medical Leave,,10.0,0.83,True
+Alberta,Bereavement Leave,,5.0,,False
+Alberta,Compassionate Care Leave,28.0,,,False
+Manitoba,Maternity Leave,17.0,,,False
+Manitoba,Parental Leave,61.0,,,False
+Manitoba,Medical Leave,,10.0,0.83,True
+Manitoba,Bereavement Leave,,5.0,,False
+Manitoba,Compassionate Care Leave,28.0,,,False
+Saskatchewan,Maternity Leave,18.0,,,False
+Saskatchewan,Parental Leave,52.0,,,False
+Saskatchewan,Medical Leave,,10.0,0.83,True
+Saskatchewan,Bereavement Leave,,5.0,,False
+Saskatchewan,Compassionate Care Leave,28.0,,,False
+Nova Scotia,Maternity Leave,17.0,,,False
+Nova Scotia,Parental Leave,61.0,,,False
+Nova Scotia,Medical Leave,,10.0,0.83,True
+Nova Scotia,Bereavement Leave,,5.0,,False
+Nova Scotia,Compassionate Care Leave,28.0,,,False
+New Brunswick,Maternity Leave,17.0,,,False
+New Brunswick,Parental Leave,61.0,,,False
+New Brunswick,Medical Leave,,10.0,0.83,True
+New Brunswick,Bereavement Leave,,5.0,,False
+New Brunswick,Compassionate Care Leave,28.0,,,False
+Newfoundland and Labrador,Maternity Leave,17.0,,,False
+Newfoundland and Labrador,Parental Leave,61.0,,,False
+Newfoundland and Labrador,Medical Leave,,10.0,0.83,True
+Newfoundland and Labrador,Bereavement Leave,,5.0,,False
+Newfoundland and Labrador,Compassionate Care Leave,28.0,,,False
+Prince Edward Island,Maternity Leave,17.0,,,False
+Prince Edward Island,Parental Leave,61.0,,,False
+Prince Edward Island,Medical Leave,,10.0,0.83,True
+Prince Edward Island,Bereavement Leave,,5.0,,False
+Prince Edward Island,Compassionate Care Leave,28.0,,,False
