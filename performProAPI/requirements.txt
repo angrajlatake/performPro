@@ -1,10 +1,23 @@
+altgraph @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/altgraph-0.17.2-py2.py3-none-any.whl
 asgiref==3.8.1
+black==24.4.2
+click==8.1.7
 Django==4.2.13
+django-cors-headers==4.4.0
 django-filter==24.2
 djangorestframework==3.15.2
+future @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl
 importlib_metadata==7.2.0
+macholib @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/macholib-1.15.2-py2.py3-none-any.whl
 Markdown==3.6
+mypy-extensions==1.0.0
 mysqlclient==2.2.4
+packaging==24.1
+pathspec==0.12.1
+platformdirs==4.2.2
+python-dotenv==1.0.1
+six @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/six-1.15.0-py2.py3-none-any.whl
 sqlparse==0.5.0
+tomli==2.0.1
 typing_extensions==4.12.2
 zipp==3.19.2
