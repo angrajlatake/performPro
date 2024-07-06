@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.list_employees, name='index'),
-    # path('api/<int:id>', views.api, name='api'),
-    # path('api/<int:id>/<int:page>', views.api, name='api'),
+    path("jwt/create/", views.CustomTokenObtainPairView.as_view()),
+    path("jwt/refresh/", views.CustomTokenRefreshView.as_view()),
+    path("jwt/verify/", views.CustomTokenVerifyView.as_view()),
+    path("logout/", views.LogoutView.as_view()),
 ]
