@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import { LogOut, LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants, Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { usePathname } from "next/navigation";
+import useLogout from "@/hooks/useLogout";
 
 interface NavProps {
   isCollapsed: boolean;
@@ -25,6 +26,7 @@ interface NavProps {
 
 export function Nav({ links, isCollapsed }: NavProps) {
   const pathname = usePathname();
+  const { handleLogout } = useLogout();
   return (
     <div
       data-collapsed={isCollapsed}
@@ -50,11 +52,6 @@ export function Nav({ links, isCollapsed }: NavProps) {
               </TooltipTrigger>
               <TooltipContent side="right" className="flex items-center gap-4">
                 {link.title}
-                {link.label && (
-                  <span className="ml-auto text-muted-foreground">
-                    {link.label}
-                  </span>
-                )}
               </TooltipContent>
             </Tooltip>
           ) : (
@@ -84,6 +81,25 @@ export function Nav({ links, isCollapsed }: NavProps) {
             </Link>
           )
         )}
+
+        <Tooltip delayDuration={0}>
+          <TooltipTrigger asChild>
+            <Button
+              variant={"ghost"}
+              size={isCollapsed ? "icon" : "default"}
+              onClick={handleLogout}
+              className={`${!isCollapsed && "justify-start"}`}
+            >
+              <LogOut className={`h-5 w-5 ${!isCollapsed && "mr-2"}`} />
+              {isCollapsed ? "" : "Logout"}
+            </Button>
+          </TooltipTrigger>
+          {isCollapsed && (
+            <TooltipContent side="right" className="flex items-center gap-4">
+              Logout
+            </TooltipContent>
+          )}
+        </Tooltip>
       </nav>
     </div>
   );

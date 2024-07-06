@@ -1,4 +1,4 @@
-import {  Blocks, CalendarDays, Clock, CreditCard, LucideIcon, TreePalm, TriangleAlert, Users } from "lucide-react";
+import {  Blocks, CalendarDays, Clock, CreditCard, LucideIcon, TreePalm, TriangleAlert, Users, LogOut } from "lucide-react";
 
 interface NavOption {
     title: string;
@@ -49,5 +49,6 @@ export const navOptions: NavOption[] = [
         icon: CreditCard,
         variant: "ghost",
         href: "admin/payroll"
-    }
+    },
+
 ]
