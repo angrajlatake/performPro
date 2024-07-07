@@ -27,21 +27,24 @@ const Layout = ({ children }: Props) => {
             isCollapsed ? "w-[60px]" : "w-[300px]"
           } transition-all duration-300 ease-in-out`}
         >
-          <div className="border-b p-1 flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="default"
-              aria-label="Home"
-              onClick={toggleSidebar}
-            >
-              <Triangle className="size-5 fill-foreground" />
-            </Button>
-            {!isCollapsed && (
-              <h1 className="text-xl font-semibold transition-all duration-300 ease-in-out">
-                PerformPro
-              </h1>
-            )}
+          <div className="border-b">
+            <div className="flex h-16 items-center p-1">
+              <Button
+                variant="ghost"
+                size="default"
+                aria-label="Home"
+                onClick={toggleSidebar}
+              >
+                <Triangle className="size-5 fill-foreground" />
+              </Button>
+              {!isCollapsed && (
+                <h1 className="text-xl font-semibold transition-all duration-300 ease-in-out">
+                  PerformPro
+                </h1>
+              )}
+            </div>
           </div>
+          {/* <div className="border-b h-16 p-1 flex items-center gap-4"></div> */}
           <Nav isCollapsed={isCollapsed} links={navOptions} />
         </aside>
       </TooltipProvider>

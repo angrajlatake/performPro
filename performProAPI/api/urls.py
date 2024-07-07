@@ -1,9 +1,10 @@
 from django.urls import path
-from . import views
+from api.views import auth, employees
 
 urlpatterns = [
-    path("jwt/create/", views.CustomTokenObtainPairView.as_view()),
-    path("jwt/refresh/", views.CustomTokenRefreshView.as_view()),
-    path("jwt/verify/", views.CustomTokenVerifyView.as_view()),
-    path("logout/", views.LogoutView.as_view()),
+    path("jwt/create/", auth.CustomTokenObtainPairView.as_view()),
+    path("jwt/refresh/", auth.CustomTokenRefreshView.as_view()),
+    path("jwt/verify/", auth.CustomTokenVerifyView.as_view()),
+    path("logout/", auth.LogoutView.as_view()),
+    path("employees/", employees.EmployeesList.as_view()),
 ]

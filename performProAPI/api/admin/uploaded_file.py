@@ -8,10 +8,12 @@ from api.models import (
     LeaveType,
     LeaveEntitlement,
     LeaveRequest,
+    Schedule,
 )
 from api.forms import UploadFileForm
 import csv
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -131,12 +133,43 @@ class UploadedFileAdmin(admin.ModelAdmin):
                         )
                 self.message_user(request, "CSV file processed successfully")
 
+    @admin.action(description="Upload schedule")
+    def upload_schedule(self, request, queryset):
+        for uploaded_file in queryset:
+            with open(uploaded_file.file.path, newline="") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    employee = Employee.objects.get(employee_id=row["employee_id"])
+                    date = row["date"]
+                    shift_start_time = row["shift_start_time"]
+                    shift_end_time = row["shift_end_time"]
+                    break_1_start_time = row["break_1_start_time"]
+                    break_1_end_time = row["break_1_end_time"]
+                    lunch_start_time = row["lunch_start_time"]
+                    lunch_end_time = row["lunch_end_time"]
+                    break_2_start_time = row["break_2_start_time"]
+                    break_2_end_time = row["break_2_end_time"]
+                    Schedule.objects.update_or_create(
+                        employee=employee,
+                        date=date,
+                        shift_start_time=shift_start_time,
+                        shift_end_time=shift_end_time,
+                        break_1_start_time=break_1_start_time,
+                        break_1_end_time=break_1_end_time,
+                        lunch_start_time=lunch_start_time,
+                        lunch_end_time=lunch_end_time,
+                        break_2_start_time=break_2_start_time,
+                        break_2_end_time=break_2_end_time,
+                    )
+                self.message_user(request, "CSV file processed successfully")
+
     actions = [
         process_csv,
         upload_province,
         upload_leaves_types,
         upload_leave_entitlements,
         upload_leave_requests,
+        upload_schedule,
     ]
 
 

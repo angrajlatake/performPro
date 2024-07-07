@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { LogOut, LucideIcon } from "lucide-react";
 
@@ -27,6 +26,7 @@ interface NavProps {
 export function Nav({ links, isCollapsed }: NavProps) {
   const pathname = usePathname();
   const { handleLogout } = useLogout();
+  console.log(pathname);
   return (
     <div
       data-collapsed={isCollapsed}
@@ -40,7 +40,11 @@ export function Nav({ links, isCollapsed }: NavProps) {
                 <Link
                   href={link.href}
                   className={cn(
-                    buttonVariants({ variant: link.variant, size: "icon" }),
+                    buttonVariants({
+                      variant:
+                        `${pathname}` === link.href ? "default" : "ghost",
+                      size: "icon",
+                    }),
                     "h-10 w-10",
                     link.variant === "default" &&
                       "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
@@ -59,7 +63,10 @@ export function Nav({ links, isCollapsed }: NavProps) {
               key={index}
               href={link.href}
               className={cn(
-                buttonVariants({ variant: link.variant, size: "default" }),
+                buttonVariants({
+                  variant: `${pathname}` === link.href ? "default" : "ghost",
+                  size: "default",
+                }),
                 link.variant === "default" &&
                   "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
                 "justify-start"

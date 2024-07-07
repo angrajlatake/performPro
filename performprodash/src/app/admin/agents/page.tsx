@@ -1,9 +1,29 @@
+"use client";
 import React from "react";
+import { Employees, columns } from "./columns";
+import { DataTable } from "./data-table";
+async function getData(): Promise<Employees[]> {
+  console.log("fetching data");
+  const response = await fetch("http://localhost:8000/api/employees/", {
+    credentials: "include",
+  });
+  if (!response.ok) {
+    console.log("error fetching data");
+  }
+  const data = await response.json();
 
-type Props = {};
+  return data;
+}
 
-const page = (props: Props) => {
-  return <div>page</div>;
-};
+export default function DemoPage() {
+  const [data, setData] = React.useState<Employees[]>([]);
+  React.useEffect(() => {
+    getData().then((data) => setData(data));
+  }, []);
 
-export default page;
+  return (
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data} />
+    </div>
+  );
+}
