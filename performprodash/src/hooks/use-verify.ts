@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/redux/hooks';
 import { setAuth, finishInitialLoad, logout } from '@/redux/features/authSlice';
-import { useVerifyMutation } from '@/redux/features/authApiSlice';
+import { useVerifyMutation, useRefreshMutation } from '@/redux/features/authApiSlice';
 import { useRouter } from 'next/navigation';
 
 export default function useVerify() {
   const dispatch = useAppDispatch();
   const [verify] = useVerifyMutation();
+  const [refresh] = useRefreshMutation();
   const router = useRouter();
 
   useEffect(() => {
@@ -16,8 +17,18 @@ export default function useVerify() {
         dispatch(setAuth());
       })
       .catch(() => {
-        dispatch(logout());
-        router.push('/auth/login');
+        refresh(undefined)
+          .unwrap()
+          .then(() => {
+            dispatch(setAuth());
+          })
+          .catch(() => {
+            dispatch(logout());
+            router.push('/auth/login');
+          })
+          .finally(() => {
+            dispatch(finishInitialLoad());
+          });
       })
       .finally(() => {
         dispatch(finishInitialLoad());

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { addDays, format } from "date-fns";
+import { addDays, format, set, differenceInDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
@@ -14,13 +14,24 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+type Prop = {
+  className?: React.HTMLAttributes<HTMLDivElement>;
+  setNoOfDays?: React.Dispatch<React.SetStateAction<number>>;
+  date?: DateRange;
+  setDate?: React.Dispatch<React.SetStateAction<DateRange>>;
+};
+
 export function CalendarDateRangePicker({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2023, 0, 20),
-    to: addDays(new Date(2023, 0, 20), 20),
-  });
+  setNoOfDays,
+  date,
+  setDate,
+}: Prop) {
+  React.useEffect(() => {
+    if (setNoOfDays && date?.to && date?.from) {
+      setNoOfDays(differenceInDays(date.to, date.from));
+    }
+  }, [date, setNoOfDays]);
 
   return (
     <div className={cn("grid gap-2", className)}>
