@@ -1,32 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { CalendarDateRangePicker } from "@/components/dateRangePicker";
 import ScheduleGrid from "@/components/scheduleGrid";
 import { DateRange } from "react-day-picker";
-import { addDays } from "date-fns";
+import { addDays, format } from "date-fns";
+import DataTable from "./sched-data-table";
+import { SchduleData } from "./columns";
 
 export default function Component() {
   const [noOfDays, setNoOfDays] = useState(20);
   const [date, setDate] = React.useState<DateRange>({
-    from: new Date(),
-    to: addDays(new Date(), 20),
+    from: new Date("2024-06-01"),
+    // to: addDays(new Date(), 20),
+    to: new Date("2024-06-30"),
   });
+  const [scheduleData, setScheduleData] = useState(null);
+
+  useEffect(() => {
+    const getSchedules = async () => {
+      if (!date) return;
+      const response = await fetch(
+        `http://localhost:8000/api/filter-schedules/?from_date=${format(
+          date?.from,
+          "yyyy-MM-dd"
+        )}&to_date=${format(date?.to, "yyyy-MM-dd")}`,
+        {
+          credentials: "include",
+        }
+      );
+      if (!response.ok) {
+        console.log("error fetching data");
+      }
+      const data = await response.json();
+      console.log(data);
+      setScheduleData(data);
+    };
+    getSchedules();
+  }, [date]);
 
   return (
     <div className="flex flex-col h-full">
@@ -50,8 +62,16 @@ export default function Component() {
           </Button>
         </div>
       </header>
-      <div className=" overflow-x-auto">
-        <ScheduleGrid noOfDays={noOfDays} date={date} />
+      <div className="overflow-x-auto text-sm">
+        {/* {scheduleData && (
+          <ScheduleGrid
+            noOfDays={noOfDays}
+            date={date}
+            scheduleData={scheduleData}
+          />
+        )} */}
+
+        {scheduleData && <DataTable data={scheduleData} date={date} />}
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import React from "react";
 import { Employees, columns } from "./columns";
 import { DataTable } from "./data-table";
 async function getData(): Promise<Employees[]> {
-  console.log("fetching data");
   const response = await fetch("http://localhost:8000/api/employees/", {
     credentials: "include",
   });
