@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from .Employees import Employee
 
 
 class Schedule(models.Model):
@@ -14,3 +13,19 @@ class Schedule(models.Model):
     lunch_end_time = models.TimeField(null=True, blank=True)
     break_2_start_time = models.TimeField(null=True, blank=True)
     break_2_end_time = models.TimeField(null=True, blank=True)
+
+
+class ScheduleStatus(models.Model):
+    schedule = models.OneToOneField(
+        "Schedule", on_delete=models.DO_NOTHING, related_name="schedule_status"
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("Off", "Off"),
+            ("LOA", "LOA"),
+            ("Attrition", "Attrition"),
+            ("Training", "Training"),
+            ("Scheduled", "Scheduled"),
+        ],
+    )

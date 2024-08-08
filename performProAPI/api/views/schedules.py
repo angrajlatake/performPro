@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
-from api.models import Schedule, Employee
+from api.models import Schedule, Employee, ScheduleStatus
 from api.serializers import EmployeeScheduleSerializer
 from django.db.models import Prefetch
 
@@ -16,10 +16,15 @@ class FilterSchedules(APIView):
             return Response(
                 {"error": "Please provide both from_date and to_date"}, status=400
             )
-
-        schedules = Schedule.objects.filter(date__range=[from_date, to_date])
+        schedules = Schedule.objects.filter(
+            date__range=[from_date, to_date]
+        ).select_related("schedule_status")
         employees = Employee.objects.prefetch_related(
-            Prefetch("schedule_set", queryset=schedules, to_attr="schedules")
+            Prefetch(
+                "schedule_set",
+                queryset=schedules,
+                to_attr="schedules",
+            )
         )
         serializer = EmployeeScheduleSerializer(employees, many=True)
         return Response(serializer.data)

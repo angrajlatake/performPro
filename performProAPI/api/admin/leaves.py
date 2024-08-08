@@ -19,7 +19,19 @@ class EmployeeLeaveAdmin(admin.ModelAdmin):
     actions = [update_leave_quote]
 
 
+class LeaveRequestAdmin(admin.ModelAdmin):
+    list_display = (
+        "employee",
+        "leave_type",
+        "start_date",
+        "end_date",
+        "status",
+        "reason",
+    )
+    sortable_by = ("employee", "leave_type", "start_date", "end_date", "status")
+
+
 admin.site.register(LeaveType)
 admin.site.register(LeaveEntitlement)
 admin.site.register(EmployeeLeaveQuota, EmployeeLeaveAdmin)
-admin.site.register(LeaveRequest)
+admin.site.register(LeaveRequest, LeaveRequestAdmin)

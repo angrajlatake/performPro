@@ -42,9 +42,11 @@ export const generateColumns = (startDate: Date, endDate: Date) => {
           const schedule = row.schedules.find(
             (s) => format(s.date, "yyyy-MM-dd") === formattedDate
           );
-          return schedule
-            ? `${schedule?.shift_start_time} - ${schedule?.shift_end_time}`
-            : "Off";
+          if (schedule) {
+            if (schedule.schedule_status?.status === "Scheduled")
+              return `${schedule?.shift_start_time} - ${schedule?.shift_end_time}`;
+            else return schedule.schedule_status?.status;
+          } else return "Off";
         },
         id: formattedDate, // Ensure each column has a unique ID
       };

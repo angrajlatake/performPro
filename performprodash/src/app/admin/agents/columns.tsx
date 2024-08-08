@@ -22,7 +22,7 @@ export const columns: ColumnDef<Employees>[] = [
     header: "Last Name",
   },
   {
-    accessorKey: "province",
+    accessorKey: "province.abbreviation",
     header: "Province",
   },
   {

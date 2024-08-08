@@ -1,5 +1,13 @@
 from django.utils import timezone
-from api.models import Employee, LeaveType, LeaveEntitlement, EmployeeLeaveQuota
+from api.models import (
+    Employee,
+    LeaveType,
+    LeaveEntitlement,
+    EmployeeLeaveQuota,
+    Schedule,
+    LeaveRequest,
+    ScheduleStatus,
+)
 
 
 def calculate_completed_months(joining_date, current_date):
@@ -62,3 +70,23 @@ def update_employee_leave_quota():
                 employee_leave_quota.current_balance = total_duration_days
                 employee_leave_quota.last_increment_date = timezone.now()
                 employee_leave_quota.save()
+
+
+def update_schedule_status():
+    schedules = Schedule.objects.all()
+    for schedule in schedules:
+        employee = schedule.employee
+        # get all leave request that are approved for the employee
+        leave_requests = LeaveRequest.objects.filter(
+            employee=employee, status="Approved"
+        )
+        # check if there is a leave request for the current schedule, if so, set the status to LOA, else set it to scheduled
+        if leave_requests.filter(
+            start_date=schedule.date, end_date=schedule.date
+        ).exists():
+            ScheduleStatus.objects.update_or_create(schedule=schedule, status="LOA")
+
+        else:
+            ScheduleStatus.objects.update_or_create(
+                schedule=schedule, status="Scheduled"
+            )

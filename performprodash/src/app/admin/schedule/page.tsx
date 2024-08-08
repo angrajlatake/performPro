@@ -10,11 +10,11 @@ import DataTable from "./sched-data-table";
 import { SchduleData } from "./columns";
 
 export default function Component() {
+  const testDate = new Date("2024-06-27");
   const [noOfDays, setNoOfDays] = useState(20);
   const [date, setDate] = React.useState<DateRange>({
-    from: new Date("2024-06-01"),
-    // to: addDays(new Date(), 20),
-    to: new Date("2024-06-30"),
+    from: testDate,
+    to: addDays(testDate, 20),
   });
   const [scheduleData, setScheduleData] = useState(null);
 

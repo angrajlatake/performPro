@@ -1,21 +1,30 @@
 from rest_framework import serializers
-from api.models import Schedule, Employee
+from api.models import Schedule, Employee, ScheduleStatus
+
+
+class ScheduleStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScheduleStatus
+        fields = ["status"]
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    schedule_status = ScheduleStatusSerializer(read_only=True)
+
     class Meta:
         model = Schedule
         fields = [
             "id",
             "date",
             "shift_start_time",
-            "shift_end_time",
             "break_1_start_time",
             "break_1_end_time",
             "lunch_start_time",
             "lunch_end_time",
             "break_2_start_time",
             "break_2_end_time",
+            "shift_end_time",
+            "schedule_status",
         ]
 
     def to_representation(self, instance):

@@ -48,7 +48,7 @@ const Layout = ({ children }: Props) => {
           <Nav isCollapsed={isCollapsed} links={navOptions} />
         </aside>
       </TooltipProvider>
-      <div className="flex-1 h-screen overflow-x-auto">
+      <div className="flex-1 h-screen">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />

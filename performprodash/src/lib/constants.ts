@@ -1,4 +1,4 @@
-import {  Blocks, CalendarDays, Clock, CreditCard, LucideIcon, TreePalm, TriangleAlert, Users, LogOut } from "lucide-react";
+import {  Blocks, CalendarDays, Clock, CreditCard, LucideIcon, TreePalm, TriangleAlert, Users, LogOut,BarChart3 } from "lucide-react";
 
 interface NavOption {
     title: string;
@@ -16,6 +16,11 @@ export const navOptions: NavOption[] = [
         title: "Schedule",
         icon: CalendarDays,
         href: "/admin/schedule"
+    },
+    {
+        title:'WFM',
+        icon: BarChart3,
+        href: "/admin/wfm"
     },
     {
         title: "Training",

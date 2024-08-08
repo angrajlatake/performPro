@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { useRouter } from "next/navigation";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -34,6 +35,13 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = React.useState<string>("");
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0, //initial page index
+    pageSize: 15, //default page size
+  });
+
+  const router = useRouter();
+
   const table = useReactTable({
     data,
     columns,
@@ -44,6 +52,7 @@ export function DataTable<TData, TValue>({
     state: {
       sorting,
       globalFilter,
+      pagination,
     },
 
     getFilteredRowModel: getFilteredRowModel(),
@@ -54,9 +63,13 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const handleRowClick = (id: string) => {
+    router.push(`/admin/agents/${id}`);
+  };
+
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center pb-2">
         <Input
           placeholder="Filter by name..."
           value={globalFilter}
@@ -90,6 +103,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => handleRowClick(row.id)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

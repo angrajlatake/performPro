@@ -14,3 +14,10 @@ class EmployeesList(APIView):
         queryset = self.get_queryset()
         serializer = EmployeeSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class EmployeeDetail(APIView):
+    def get(self, request, id, format=None):
+        employee = Employee.objects.get(id=id)
+        serializer = EmployeeSerializer(employee)
+        return Response(serializer.data)

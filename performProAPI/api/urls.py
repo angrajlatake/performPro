@@ -7,6 +7,7 @@ urlpatterns = [
     path("jwt/verify/", auth.CustomTokenVerifyView.as_view()),
     path("logout/", auth.LogoutView.as_view()),
     path("employees/", employees.EmployeesList.as_view()),
+    path("employees/<int:id>/", employees.EmployeeDetail.as_view()),
     path(
         "filter-schedules/",
         schedules.FilterSchedules.as_view(),
